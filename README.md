@@ -1,2 +1,2 @@
-# lxi-tools-msys2
-MSYS2 scripts for building lxi-tools Windows installer
+# lxi-tools-windows-installer
+MSYS2 scripts for building the lxi-tools Windows installer
