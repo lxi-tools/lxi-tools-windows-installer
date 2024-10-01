@@ -1,0 +1,44 @@
+name: lxi-tools-win64-release
+on: [workflow_dispatch]
+
+jobs:
+  build-release:
+    permissions: write-all
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MSYS
+          update: true
+      - name: Build
+        run: |
+          bash msys2_scripts/msys2-lxi-tools-pacman.sh
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-imagemagick
+          meson setup liblxi/build liblxi
+          meson compile -C liblxi/build
+          meson install -C liblxi/build
+          export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/ucrt64/lib/pkgconfig:$PKG_CONFIG_PATH
+          meson setup lxi-tools/build lxi-tools
+          export BUILD_VERSION=$(shell meson introspect --projectinfo lxi-tools/build | /ucrt64/bin/jq -r '.version')
+          meson compile -j 1 -C lxi-tools/build
+          pacman -Rsc --noconfirm mingw-w64-ucrt-x86_64-imagemagick mingw-w64-ucrt-x86_64-jq
+          bash msys2_scripts/msys2-lxi-tools-redistributable.sh
+          export APP_DATA=AppData
+          /ucrt64/bin/makensis msys2_scripts/nsis_lxi-toolst.nsi
+          echo $BUILD_VERSION > release_tag.txt
+          mv msys2_scripts/lxi-tools-$BUILD_VERSION.exe .
+      - name: Upload Lxi Tools windows x64
+        shell: cmd
+        run: |
+         set /p Release_tag=<release_tag.txt
+         gh release create v%Release_tag% lxi-tools-%Release_tag%.exe
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
