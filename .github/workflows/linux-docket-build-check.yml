@@ -1,0 +1,19 @@
+name: lxi-tools-linux-docker-check
+on: [workflow_dispatch]
+
+jobs:
+  build-linux-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Build in docker
+        run:
+         sh docker/docker_command.sh
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: lxi-tools.exe
+          path: lxi-tools.exe
