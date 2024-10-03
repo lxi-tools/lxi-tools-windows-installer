@@ -60,7 +60,7 @@ cp /usr/bin/msys-tirpc-3.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_
 cp /usr/bin/msys-wind-0.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /usr/bin/msys-xml2-2.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 
-cp /ucrt64/bin/lib*.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
+cp /ucrt64/bin/*.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /ucrt64/bin/lua54.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /ucrt64//bin/zlib1.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /ucrt64//bin/gdbus.exe $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
