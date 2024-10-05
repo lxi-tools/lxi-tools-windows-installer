@@ -11,7 +11,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 REDISTRIBUTABLE_DIR=lxi-tools-redistributable
 
-LXI_TOOLS_APP_DATA=AppData
+LXI_TOOLS_APP_DATA=usr
 
 echo "copy required files in folder $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR"
 

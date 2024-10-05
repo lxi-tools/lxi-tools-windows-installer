@@ -32,7 +32,7 @@ jobs:
           meson compile -j 1 -C lxi-tools/build
           pacman -Rsc --noconfirm mingw-w64-ucrt-x86_64-imagemagick mingw-w64-ucrt-x86_64-jq
           bash msys2_scripts/msys2-lxi-tools-redistributable.sh
-          export APP_DATA=AppData
+          export APP_DATA=usr
           /ucrt64/bin/makensis msys2_scripts/nsis_lxi-toolst.nsi
           echo $BUILD_VERSION > release_tag.txt
           cat release_tag.txt 
