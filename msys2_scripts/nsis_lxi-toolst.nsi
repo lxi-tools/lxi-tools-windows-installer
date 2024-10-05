@@ -8,8 +8,7 @@ Icon "..\lxi-tools\build\src\lxi-tools.ico"
 
 Outfile "lxi-tools-$%BUILD_VERSION%.exe"
 
-InstallDir "C:\${COMPANYNAME}"
-  #\${APPNAME}"
+InstallDir "C:\Program Files\${COMPANYNAME}"
 
 page directory
 Page instfiles
