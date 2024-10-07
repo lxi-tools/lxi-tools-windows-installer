@@ -26,6 +26,7 @@ mkdir -p $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/share/glib-2.0/
 
 cp /etc/netconfig $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/etc
 cp $SCRIPT_DIR/../lxi-tools/build/src/lxi*.exe $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
+cp $SCRIPT_DIR/../lxi-tools/LICENSE $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/
 cp -r $SCRIPT_DIR/../lxi-tools/examples $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/
 cp -r /ucrt64/lib/gdk-pixbuf-2.0 $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/lib/gdk-pixbuf-2.0/
 cp -r /ucrt64/share/icons/* $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/share/icons/

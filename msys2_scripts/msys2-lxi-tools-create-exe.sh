@@ -13,7 +13,7 @@ REDISTRIBUTABLE_DIR=lxi-tools-redistributable
 
 export APP_DATA=usr
 
-export BUILD_VERSION=$(shell $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/AppData/bin/lxi -v | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+export BUILD_VERSION=$(shell $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$APP_DATA/bin/lxi -v | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
 echo VERSION $BUILD_VERSION
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
