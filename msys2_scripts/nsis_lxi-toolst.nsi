@@ -1,6 +1,12 @@
+!include "MUI.nsh"
+
 !define COMPANYNAME "Lxi-Tools"
 !define APPNAME "Lxi-Tools-$%BUILD_VERSION%"
 !define DESCRIPTION "Lxi Tools "
+
+!define LicenseFile "..\lxi-tools\LICENSE"
+!define MUI_ICON "..\lxi-tools\build\src\lxi-tools.ico"
+!define MUI_UNICON "..\lxi-tools\build\src\lxi-tools.ico"
 
 Name "${COMPANYNAME} - ${APPNAME}"
 
@@ -9,6 +15,9 @@ Icon "..\lxi-tools\build\src\lxi-tools.ico"
 Outfile "lxi-tools-$%BUILD_VERSION%.exe"
 
 InstallDir "C:\Program Files\${COMPANYNAME}"
+
+!insertmacro MUI_PAGE_LICENSE "${LicenseFile}"
+!insertmacro MUI_LANGUAGE "English"
 
 page directory
 Page instfiles
