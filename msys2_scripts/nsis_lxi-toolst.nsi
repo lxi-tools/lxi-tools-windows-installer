@@ -8,7 +8,7 @@
 !define MUI_ICON "..\lxi-tools\build\src\lxi-tools.ico"
 !define MUI_UNICON "..\lxi-tools\build\src\lxi-tools.ico"
 
-Name "${COMPANYNAME} - ${APPNAME}"
+Name "${APPNAME}"
 
 Icon "..\lxi-tools\build\src\lxi-tools.ico"
 
@@ -16,13 +16,18 @@ Outfile "lxi-tools-$%BUILD_VERSION%.exe"
 
 InstallDir "C:\Program Files\${COMPANYNAME}"
 
+!insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "${LicenseFile}"
-!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
 
-page directory
-Page instfiles
-UninstPage uninstConfirm
-UninstPage instfiles
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
+
+!insertmacro MUI_LANGUAGE "English"
 
 # start default section
 Section "install"
@@ -65,19 +70,9 @@ Section "install"
     Delete $TEMP\lxi-tools.ico
 SectionEnd
 
-function un.onInit
-    # SetShellVarContext all
-
-    #Verify the uninstaller - last chance to back out
-    MessageBox MB_OKCANCEL "Are you sure you want to remove Lxi Tools?" IDOK next
-        Abort
-    next:
-functionEnd
 
 # uninstaller section start
 Section "uninstall"
-    # SetShellVarContext all
-
     rmDir /r "$SMPROGRAMS\${COMPANYNAME}"
     rmDir /r "$INSTDIR"
 
