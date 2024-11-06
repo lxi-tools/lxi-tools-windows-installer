@@ -52,7 +52,7 @@ cp /usr/bin/msys-hx509-5.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_
 cp /usr/bin/msys-iconv-2.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /usr/bin/msys-krb5-26.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 
-cp /usr/local/bin/msys-lxi-1.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
+cp /usr/local/bin/*.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /usr/bin/msys-ncursesw6.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /usr/bin/msys-readline8.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 cp /usr/bin/msys-roken-18.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/

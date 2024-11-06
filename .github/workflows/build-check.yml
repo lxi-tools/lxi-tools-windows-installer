@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: true
       - uses: msys2/setup-msys2@v2
         with:
@@ -22,6 +23,10 @@ jobs:
       - name: Build
         run: |
           bash msys2_scripts/msys2-lxi-tools-pacman.sh
+          LXI_TAG="$(cd lxi-tools && git describe --tags)"
+          LIBLXI_TAG="$(cd liblxi && git describe --tags)"
+          FULL_TAG=$LXI_TAG-$LIBLXI_TAG
+          cd lxi-tools && meson rewrite kwargs set project / version $FULL_TAG && cd ..
           pacman -S --noconfirm mingw-w64-ucrt-x86_64-imagemagick
           meson setup liblxi/build liblxi
           meson compile -C liblxi/build

@@ -33,6 +33,8 @@ cd $SCRIPT_DIR/../$LIBLXI_DIR && meson install -C build
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/ucrt64/lib/pkgconfig:$PKG_CONFIG_PATH
 
+cd $SCRIPT_DIR/../$LXI_TOOLS_DIR && git config core.filemode false
+
 cd $SCRIPT_DIR/../$LXI_TOOLS_DIR && meson setup build
 
 cd $SCRIPT_DIR/../$LXI_TOOLS_DIR && meson compile -j 1 -C build
