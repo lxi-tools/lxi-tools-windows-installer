@@ -1,9 +1,10 @@
 name: lxi-tools-win64-release
 on: [workflow_dispatch]
 
+permissions: write-all
+
 jobs:
   build-release:
-    permissions: write-all
     runs-on: windows-latest
     defaults:
       run:
@@ -20,6 +21,8 @@ jobs:
       - name: Build
         run: |
           bash msys2_scripts/msys2-lxi-tools-pacman.sh
+          git config --global core.filemode false
+          git config --global core.autocrlf input
           LXI_TAG="$(cd lxi-tools && git describe --tags)"
           LIBLXI_TAG="$(cd liblxi && git describe --tags)"
           FULL_TAG=$LXI_TAG-$LIBLXI_TAG
