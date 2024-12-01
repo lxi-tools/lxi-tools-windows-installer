@@ -13,4 +13,6 @@ MSYS_SCRIPT="msys2_scripts/"
 
 cd $SCRIPT_DIR/../$MSYS_SCRIPT && sh msys2-lxi-tools-pacman.sh
 
+cd $SCRIPT_DIR/../$MSYS_SCRIPT && sh msys2-lxi-tools-downgrade_packs.sh
+
 cd $SCRIPT_DIR/../$MSYS_SCRIPT && sh msys2-lxi-tools-build-pack.sh

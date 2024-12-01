@@ -1,10 +1,11 @@
-name: lxi-tools-win64-release
-on: [workflow_dispatch]
+name: lxi-tools-win64-build-downgrade-packs-check
+on: [push, workflow_dispatch]
 
-permissions: write-all
+env:
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build-release:
+  build-check:
     runs-on: windows-latest
     defaults:
       run:
@@ -18,12 +19,15 @@ jobs:
         with:
           msystem: MSYS
           update: true
+          install: git
       - name: Build
         run: |
           bash msys2_scripts/msys2-lxi-tools-pacman.sh
           bash msys2_scripts/msys2-lxi-tools-downgrade_packs.sh
-          git config --global core.filemode false
-          git config --global core.autocrlf input
+          LXI_TAG="$(cd lxi-tools && git describe --tags)"
+          LIBLXI_TAG="$(cd liblxi && git describe --tags)"
+          FULL_TAG=$LXI_TAG-$LIBLXI_TAG
+          cd lxi-tools && meson rewrite kwargs set project / version $FULL_TAG && cd ..
           pacman -S --noconfirm mingw-w64-ucrt-x86_64-imagemagick
           meson setup liblxi/build liblxi
           meson compile -C liblxi/build
@@ -38,13 +42,10 @@ jobs:
           export APP_DATA=usr
           /ucrt64/bin/makensis msys2_scripts/nsis_lxi-toolst.nsi
           echo $BUILD_VERSION > release_tag.txt
-          mv msys2_scripts/lxi-tools-$BUILD_VERSION.exe .
-      - name: Upload Lxi Tools windows x64
-        shell: cmd
-        run: |
-         set /p Release_tag=<release_tag.txt
-         gh release create v%Release_tag% lxi-tools-%Release_tag%.exe
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.event.repository.name }}
+          cat release_tag.txt 
+          mv msys2_scripts/lxi-tools-$BUILD_VERSION.exe lxi-tools.exe
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: lxi-tools.exe
+          path: lxi-tools.exe
