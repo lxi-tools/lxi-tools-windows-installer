@@ -1,5 +1,5 @@
 name: lxi-tools-win64-build-downgrade-packs-check
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 env:
   TOKEN: ${{ secrets.GITHUB_TOKEN }}

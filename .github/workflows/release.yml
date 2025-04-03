@@ -21,7 +21,6 @@ jobs:
       - name: Build
         run: |
           bash msys2_scripts/msys2-lxi-tools-pacman.sh
-          bash msys2_scripts/msys2-lxi-tools-downgrade_packs.sh
           git config --global core.filemode false
           git config --global core.autocrlf input
           pacman -S --noconfirm mingw-w64-ucrt-x86_64-imagemagick
