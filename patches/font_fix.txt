@@ -1,0 +1,9 @@
+textview {
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  font-size: 1.25rem;
+}
+
+
+box {
+  font-size: 1.1rem;
+}
