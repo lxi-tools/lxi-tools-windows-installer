@@ -36,7 +36,6 @@ jobs:
           meson setup lxi-tools/build lxi-tools
           export BUILD_VERSION=$(shell meson introspect --projectinfo lxi-tools/build | /ucrt64/bin/jq -r '.version')
           cat patches/font_fix.txt >> lxi-tools/src/lxi_gui.css
-          patch  -p1 < patches/font_fix_src.diff
           meson compile -j 1 -C lxi-tools/build
           pacman -Rsc --noconfirm mingw-w64-ucrt-x86_64-imagemagick mingw-w64-ucrt-x86_64-jq
           bash msys2_scripts/msys2-lxi-tools-redistributable.sh
