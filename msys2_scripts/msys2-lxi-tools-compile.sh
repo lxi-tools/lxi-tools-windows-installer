@@ -37,8 +37,6 @@ export PATH=$PATH:/ucrt64/bin/
 cd $SCRIPT_DIR/../$LXI_TOOLS_DIR && meson setup build
 
 cat $SCRIPT_DIR/../patches/font_fix.txt >> $SCRIPT_DIR/../lxi-tools/src/lxi_gui.css
-cd $SCRIPT_DIR/../ && patch  -p1 < patches/font_fix_src.diff
-
 cd $SCRIPT_DIR/../$LXI_TOOLS_DIR && meson compile -j 1 -C build
 
 #restore /ucrt/bin/glib-compile-resources
