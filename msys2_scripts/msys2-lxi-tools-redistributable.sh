@@ -67,3 +67,33 @@ cp /ucrt64//bin/zlib1.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DAT
 cp /ucrt64//bin/gdbus.exe $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
 
 cp /usr/local/bin/msys-lxi-1.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/bin/
+
+
+# add lua-cjson in lua-socket in package, lua-socket needs to be compiled
+
+pacman -S --noconfirm wget make mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-lua-cjson
+
+wget https://github.com/lunarmodules/luasocket/archive/refs/tags/v3.1.0.tar.gz
+
+tar -xvf v3.1.0.tar.gz
+
+
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/ucrt64/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH=$PATH:/ucrt64/bin/
+
+
+cd luasocket-3.1.0/ && make LUAV=5.4  MYLDFLAGS=-llua.dll LUAINC_mingw=/ucrt64/include LUALIB_mingw_base=/ucrt64/bin/ LUALIB_mingw=/ucrt64/bin/lua54.dll CC_mingw=/ucrt64/bin/gcc LD_mingw=/ucrt64/bin/gcc PLAT=mingw && cd ..
+
+cd luasocket-3.1.0/ && make LUAV=5.4  MYLDFLAGS=-llua.dll LUAINC_mingw=/ucrt64/include LUALIB_mingw_base=/ucrt64/bin/ LUALIB_mingw=/ucrt64/bin/lua54.dll CC_mingw=/ucrt64/bin/gcc LD_mingw=/ucrt64/bin/gcc PLAT=mingw install && cd ..
+
+mkdir -p $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/lib/lua/5.4/
+
+mkdir -p $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/share/lua/5.4/
+
+cp /ucrt64/lib/lua/5.4/cjson.dll $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/lib/lua/5.4/cjson.dll
+
+cp -r /usr/lua/5.4/socket $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/lib/lua/5.4/
+
+cp -r  /usr/lua/5.4/lua/*.lua $SCRIPT_DIR/../$REDISTRIBUTABLE_DIR/$LXI_TOOLS_APP_DATA/share/lua/5.4/
+
+pacman -Rsc --noconfirm make mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-lua-cjson
